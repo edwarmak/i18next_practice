@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useTranslation, Trans } from 'react-i18next'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 
 const lngs = {
   en: { nativeName: 'English'},
@@ -50,4 +50,10 @@ function App() {
   );
 }
 
-export default App;
+export default function WrappedApp() {
+  return (
+    <Suspense fallback="...is loading">
+      <App />
+    </Suspense>
+  );
+}
