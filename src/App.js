@@ -1,17 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
 import { useTranslation, Trans } from 'react-i18next'
-import { useState, Suspense } from 'react'
+import { useState, Suspense, useEffect } from 'react'
 
-const lngs = {
-  en: { nativeName: 'English'},
-  de: { nativeName: 'Deutsch'}
-}
 
 function App() {
   const { t, i18n } = useTranslation()
   //  counter for language switch
   const [count, setCount] = useState(0)
+  // connect to backend locize
+  const [lngs, setLngs] = useState({ en: { nativeName: 'English' }});
+
+  useEffect(() => {
+    i18n.services.backendConnector.backend.getLanguages((err, ret) => {
+      if (err) return // TODO: handle err...
+      setLngs(ret);
+  })
+}, [])
+
 
   return (
     <div className="App">
@@ -27,15 +33,22 @@ function App() {
             </button>
           ))}
         </div>
+            
+            
+        <div>{t('new.key', 'this will be added automatically')}</div>
+        <div>{t('second.key', 'this is an example.')}</div>
+
+        
+  
+
+
 
         <p>
           <i>{t('counter', { count })}</i>
         </p>
 
         <p>
-          <Trans i18nKey="description.part1">
-            Edit <code>src/App.js</code> and save to reload.
-          </Trans>
+          {t('edit', 'Edit <code>src/App.js</code> and save to reload.')}
         </p>
         <a
           className="App-link"
@@ -43,7 +56,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {t('description.part2')}
+          {t('learn', 'Learn React')}
         </a>
       </header>
     </div>
