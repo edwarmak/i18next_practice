@@ -37,10 +37,7 @@ function App() {
             
         <div>{t('new.key', 'this will be added automatically')}</div>
         <div>{t('second.key', 'this is an example.')}</div>
-
-        
-  
-
+        <div>{t('third.key', 'deployed to heroku!')}</div>
 
 
         <p>
