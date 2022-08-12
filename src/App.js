@@ -37,7 +37,6 @@ function App() {
             
         <div>{t('new.key', 'this will be added automatically')}</div>
 
-
         <p>
           <i>{t('counter', { count })}</i>
         </p>
